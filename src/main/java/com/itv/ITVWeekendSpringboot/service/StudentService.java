@@ -27,5 +27,23 @@ public class StudentService {
 	public Student student(int rno) {
 		return studentRepository.findById(rno).get();
 	}
+	public void deleteStudent(int rno) {
+		studentRepository.deleteById(rno);
+	}
+	public List<Student> saveAllStudents(List<Student> students) {
+		return studentRepository.saveAll(students);
+	}
+	public Student updateStudent(int rno, Student newDetails) {
+			Student studFromDb=student(rno);
+			studFromDb.setAge(newDetails.getAge());
+			studFromDb.setDob(newDetails.getDob());
+			studFromDb.setEmail(newDetails.getEmail());
+			studFromDb.setFirstName(newDetails.getFirstName());
+			studFromDb.setGender(newDetails.getGender());
+			studFromDb.setLastName(newDetails.getLastName());
+			studFromDb.setPercentage(newDetails.getPercentage());
+			return saveStudent(studFromDb);
+			
+	}
 
 }
