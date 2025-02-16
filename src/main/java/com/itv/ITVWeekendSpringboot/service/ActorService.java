@@ -20,13 +20,23 @@ public class ActorService {
 		
 		Actor actordb=actorRepository.findByAname(actor.getAname());
 		
+		try
+		{
+		if(actordb==null)
+			throw new RuntimeException("Actor Not Found");
+		}
+		catch(RuntimeException re)
+		{
+		return actorRepository.save(actor);
+		}
+		
 		
 		for(Movie movie:actor.getPortfolio())
 		{
 			Movie moviedb=movieRepository.findById(movie.getMno()).get();
-			if (!actordb.getPortfolio().contains(movie)) {
+			if (!actordb.getPortfolio().contains(moviedb)) {
 				actordb.getPortfolio().add(movie);
-                movie.getStarcast().add(actordb);
+               // moviedb.getStarcast().add(actordb);
             }
 		}
 		
