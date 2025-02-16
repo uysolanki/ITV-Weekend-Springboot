@@ -74,7 +74,7 @@ public class Student {
 	LocalDate dob;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "rno", referencedColumnName = "rno")
 	List<Subject> subjects;
 	
