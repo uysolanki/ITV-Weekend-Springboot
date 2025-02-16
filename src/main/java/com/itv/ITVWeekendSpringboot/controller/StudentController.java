@@ -157,9 +157,8 @@ public class StudentController {
 		try {
 			return new ResponseEntity<Student>(studentService.updateStudent(rno,newDetails),HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("Error adding record: " + e.getMessage(),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Error Updating record: " + e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
-
 	}
 	
 }
