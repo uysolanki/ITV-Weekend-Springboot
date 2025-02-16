@@ -1,12 +1,17 @@
 package com.itv.ITVWeekendSpringboot.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Email;
@@ -67,5 +72,10 @@ public class Student {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "Date Of Birth cannot be null") 
 	LocalDate dob;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name = "rno", referencedColumnName = "rno")
+	List<Subject> subjects;
 	
 }
