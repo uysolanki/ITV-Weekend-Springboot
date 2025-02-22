@@ -3,6 +3,7 @@ package com.itv.ITVWeekendSpringboot.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -111,6 +112,16 @@ public class StudentController {
 	{
 		try {
 			return new ResponseEntity<List<Student>>(studentService.students(),HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("Error adding record: " + e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/studentsPagination/{pageNumber}/{pageSize}")
+	public ResponseEntity<?> studentsPagination(@PathVariable int pageNumber,@PathVariable int pageSize)
+	{
+		try {
+			return new ResponseEntity<Page<Student>>(studentService.studentsPagination(pageNumber,pageSize),HttpStatus.ACCEPTED);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("Error adding record: " + e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
